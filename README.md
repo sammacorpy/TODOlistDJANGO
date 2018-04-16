@@ -10,6 +10,9 @@ then clone this project on your local system
 open powershell/terminal in the master folder where you find manage.py
 
 run this command 
+
 python manage.py makemigrations
+
 python manage.py migrate
+
 python manage.py runserver
