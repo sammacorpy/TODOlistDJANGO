@@ -38,6 +38,7 @@ def completetask(request):
     tid=request.POST['id']
     obj=todo.objects.get(id=tid)
     obj.complete=True
+    obj.suspended=False
     obj.save()
     return redirect('homepage')
 
