@@ -166,7 +166,7 @@
                                                     <h4>Last date to complete</h4>  
                                                     <div class="tldate">{{item.lastdate}}</div>
                                             </div>
-                                            <div>
+                                            <div style="display:flex">
                                                     <form method="post" action="{% url 'activate' %}">
                                                             {% csrf_token %}
                                                             <input type="hidden" name="id" value="{{item.id}}">
@@ -177,7 +177,7 @@
                                                         {% csrf_token %}
                                                             <input type="hidden" name="id" value="{{item.id}}">
                                                         
-                                                            <button type="submit" class="macomplete">Mark as Completed</button>
+                                                            <button  type="submit" class="macomplete">Mark as Completed</button>
                                                     </form>
                                                    
                                             </div>
@@ -196,7 +196,7 @@
                                                 <h4>Last date to complete</h4>  
                                                     <div class="tldate">{{item.lastdate}}</div>
                                              </div>
-                                             <div>
+                                             <div style="display:flex">
                                                     <form method="post" action="{% url 'suspend' %}">
                                                             {% csrf_token %}
                                                             <input type="hidden" name="id" value="{{item.id}}">
@@ -207,7 +207,7 @@
                                                         {% csrf_token %}
                                                             <input type="hidden" name="id" value="{{item.id}}">
                                                         
-                                                            <button type="submit" class="macomplete">Mark as Completed</button>
+                                                            <button type="submit"  class="macomplete">Mark as Completed</button>
                                                     </form>
                                                 </div>
                                              

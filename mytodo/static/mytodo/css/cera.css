@@ -363,13 +363,17 @@ canvas{
     border-bottom: 1px dotted;
     padding:5px;
     font-weight: bold;
+    max-width: 250px;
+    word-break:break-all;
 }
 .tbody{
-    padding:5px;
+    padding:10px;
     font-weight: lighter;
     box-shadow: 0px 0px 1px #fff;
     margin: 20px 0;
     color:#ccc;
+    max-width: 250px;
+    word-break:break-all;
 }
 
 .tfooter{
@@ -386,6 +390,7 @@ canvas{
     border-radius:10px 10px;
     padding: 10px; 
     color: black;
+    margin:0 10px; 
 }
 .delete{
     background: orange;
