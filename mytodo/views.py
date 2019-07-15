@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect
+from django.utils.safestring import mark_safe
+
 from django.views.decorators.http import require_POST
 # Create your views here.
 from .models import *
@@ -23,14 +25,14 @@ def addtask(request):
         new=todo(title=request.POST['title'],desc=request.POST['desc'],lastdate=request.POST['lastdate'])
         new.save()
   
-    return redirect('homepagetodo')
+    return redirect(mark_safe('/#todo'))
 
 
 @require_POST
 def deletetask(request):
     tid=request.POST['id']
     todo.objects.filter(id=tid).delete()
-    return redirect('homepagetodo')
+    return redirect(mark_safe('/#todo'))
 
 
 @require_POST
@@ -40,7 +42,7 @@ def completetask(request):
     obj.complete=True
     obj.suspended=False
     obj.save()
-    return redirect('homepagetodo')
+    return redirect(mark_safe('/#todo'))
 
 
 
@@ -50,7 +52,7 @@ def activatetask(request):
     obj=todo.objects.get(id=tid)
     obj.suspended=False
     obj.save()
-    return redirect('homepagetodo')
+    return redirect(mark_safe('/#todo'))
 
 
 
@@ -60,6 +62,6 @@ def suspendtask(request):
     obj=todo.objects.get(id=tid)
     obj.suspended=True
     obj.save()
-    return redirect('homepagetodo')
+    return redirect(mark_safe('/#todo'))
 
 
