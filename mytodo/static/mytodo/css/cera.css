@@ -91,6 +91,10 @@ span:first-child {
     margin-left: auto;
     margin-right: auto;
 }
+.jmbbanner >img{
+    max-width: 100vw;
+}
+
 
 .textquotes {
     color: white;
