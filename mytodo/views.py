@@ -23,14 +23,14 @@ def addtask(request):
         new=todo(title=request.POST['title'],desc=request.POST['desc'],lastdate=request.POST['lastdate'])
         new.save()
   
-    return redirect('homepage')
+    return redirect('homepagetodo')
 
 
 @require_POST
 def deletetask(request):
     tid=request.POST['id']
     todo.objects.filter(id=tid).delete()
-    return redirect('homepage')
+    return redirect('homepagetodo')
 
 
 @require_POST
@@ -40,7 +40,7 @@ def completetask(request):
     obj.complete=True
     obj.suspended=False
     obj.save()
-    return redirect('homepage')
+    return redirect('homepagetodo')
 
 
 
@@ -50,7 +50,7 @@ def activatetask(request):
     obj=todo.objects.get(id=tid)
     obj.suspended=False
     obj.save()
-    return redirect('homepage')
+    return redirect('homepagetodo')
 
 
 
@@ -60,6 +60,6 @@ def suspendtask(request):
     obj=todo.objects.get(id=tid)
     obj.suspended=True
     obj.save()
-    return redirect('homepage')
+    return redirect('homepagetodo')
 
 
