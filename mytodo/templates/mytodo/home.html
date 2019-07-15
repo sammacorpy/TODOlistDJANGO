@@ -1,250 +1,257 @@
-
 {% load static %}
 <!-- <!DOCTYPE html> -->
 <html>
-        
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Todo || {{ title }}</title>
-        
-            <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-        
-            <script src="{% static 'mytodo/js/cera.js' %}"></script>
-            <link rel="stylesheet" href="{% static 'mytodo/css/cera.css' %}" type="text/css">
-            <script>
-                function deleteid(params) {
-                    $.ajax({
-                        url:'delete',
-                        type:'POST',
-                        success:function(e) {
-                            location.reload();
-                            }
-                            
-                        
-                    })
-                    
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo || {{ title }}</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script src="{% static 'mytodo/js/cera.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'mytodo/css/cera.css' %}" type="text/css">
+    <script>
+        function deleteid(params) {
+            $.ajax({
+                url: 'delete',
+                type: 'POST',
+                success: function (e) {
+                    location.reload();
                 }
-            </script>
-        </head>
-        
-        <body>
-            <div class="topnavback"></div>
-            <nav class="topnav fixed">
-        
-        
-                <button type="button" class="navbtn">
-                    <center> <span style="width:18px"></span>
-                        <span style="width:18px"></span>
-                        <span style="width:18px"></span>
-                        </center>
-                </button>
-                <div class="hamburg shows">
-                    <div class="listnavitems shows">
-        
-                        <a href="/">Home</a>
-                        <a href="#todo">Todo Items</a>
-                       
-                        <a href="#status">status</a>
-                        
-        
-                    </div>
-        
-                </div>
-        
-        
-            </nav>
-            <canvas width="150px" height="150px" id="logring">
-        
-        
-                
-            </canvas>
-        
-            <div class="logo">
-                <a href="#"> <img src="{% static 'mytodo/celogo.jpg' %}" width="50px" height="50px"> </a>
-        
-        
-            </div>
-        
-            <div class="container main_container">
-        
-                <div style="display:flex;"></div>
-        
-                <div class="jmbbanner">
-        
-                    <img id="quotespic" src="{% static 'mytodo/centrelog.jpg' %}">
-        
-        
-                    <div class="textquotes">
-                        <div>
-                            If you can't remember your past<br> then you are condemned to repeat it.<br><br>
-                             -Dynamic Programming
-                        </div>
-                        <div class="lgsignup">
-                            <button class="btn signin" onclick="location.href='#form'">Add task to your todo list</button>
-                            
-                        </div>
-                    </div>
-        
-                    
-        
-        
-        
-                </div>
-        
-                <div class="maincontent">
-                    <div id="form" class="form">
-                        <h1>What do you want to do today?</h1>
-                        <form action="{% url 'add' %}"  method="POST" >
-                            {% csrf_token %}
-                            <div>
 
-                                {{form.title}}
-                            </div>
-                            <div>
-                               {{form.desc}}
 
-                            </div>
-                            <div>
-                                {{form.lastdate}}
-                            </div>
-                            <div>
-                                <input type="submit" class=" formbtn" value="ADD">
-                               
-                                
-                            </div>
-                            <div>
-                                    <br>view | manage your <a href="#todo" style="color:#445;text-decoration:none; font-size:20px;">TO DO LIST </a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            })
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="topnavback"></div>
+    <nav class="topnav fixed">
+
+
+        <button type="button" class="navbtn">
+            <center> <span style="width:18px"></span>
+                <span style="width:18px"></span>
+                <span style="width:18px"></span>
+            </center>
+        </button>
+        <div class="hamburg shows">
+            <div class="listnavitems shows">
+
+                <a href="/">Home</a>
+                <a href="#todo">Todo Items</a>
+
+                <a href="#status">status</a>
+
 
             </div>
-            
-                    <div class="secondarycontent" id="todo">
-                        <center><h1>TO-DO LIST</h1></center>
-                        <center>
-                        {% for item in tlist %}
-                            {% if item.complete %}
-                                <div class="card completed">
-                                    <div class="theader">
-                                        {{item.title}}
-                                    </div>
-                                    <div class="tbody">
-                                            <h4>Description:</h4>  
-                                        {{item.desc}}
-                                        
-                                    </div>
-                                    <div class="tfooter">
-                                            <h4>Last date to complete</h4>  
-                                        <div class="tldate">{{item.lastdate}}</div>
-                                    </div>
-                                    <div>
-                                            <form method="post" action="{% url 'delete' %}">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="id" value="{{item.id}}">
-                                                
-                                                    <button type="submit" class="delete">Delete</button>
-                                            </form>
-                                    </div>
-                                </div>
-                            {% elif item.suspended %}
-                                <div class="card suspended">
-                                        <div class="theader">
-                                                {{item.title}}
-                                            </div>
-                                            <div class="tbody">
-                                                    <h4>Description:</h4> 
-                                                {{item.desc}}
-                                            </div>
-                                            <div class="tfooter">
-                                                    <h4>Last date to complete</h4>  
-                                                    <div class="tldate">{{item.lastdate}}</div>
-                                            </div>
-                                            <div class="bt" >
-                                                    <form method="post" action="{% url 'activate' %}">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" name="id" value="{{item.id}}">
-                                                        
-                                                            <button type="submit" class="activate">Activate</button>
-                                                    </form>
-                                                   <form method="post" action="{% url 'macomp' %}">
-                                                        {% csrf_token %}
-                                                            <input type="hidden" name="id" value="{{item.id}}">
-                                                        
-                                                            <button  type="submit" class="macomplete">Mark as Completed</button>
-                                                    </form>
-                                                   
-                                            </div>
-                                        
-                                </div>
-                            {% else %}
-                                <div class="card pending">
-                                        <div class="theader">
-                                                {{item.title}}
-                                            </div>
-                                            <div class="tbody">
-                                                    <h4>Description:</h4> 
-                                                {{item.desc}}
-                                            </div>
-                                            <div class="tfooter">
-                                                <h4>Last date to complete</h4>  
-                                                    <div class="tldate">{{item.lastdate}}</div>
-                                             </div>
-                                             <div class="bt" >
-                                                    <form method="post" action="{% url 'suspend' %}">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" name="id" value="{{item.id}}">
-                                                        
-                                                            <button type="submit" class="suspend">Suspend</button>
-                                                    </form>
-                                                   <form method="post" action="{% url 'macomp' %}">
-                                                        {% csrf_token %}
-                                                            <input type="hidden" name="id" value="{{item.id}}">
-                                                        
-                                                            <button type="submit"  class="macomplete">Mark as Completed</button>
-                                                    </form>
-                                                </div>
-                                             
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                        </center>
-                    </div>
-            
-            
-                    <div class="footer" id="status">
-                        <center>
-                            <h1>Status</h1>
 
-                            <div style="display: inline-block;border:1px solid; color:#f00;border-radius:10px 10px;padding:50px;margin:30px">Suspended Task:<br>{{csus}}%
-                              
-                            </div>
-                            <div style="display: inline-block;border:1px solid;color: orange;border-radius:10px 10px;padding:50px;margin:30px">Completed Task:<br>{{cmc}}%
-                              
-                            </div>
-                            <div style="display: inline-block;border:1px solid;color: #ddd;border-radius:10px 10px;padding:50px;margin:30px">pending Task:<br>{{tp}}%
-                              
-                            </div>
+        </div>
 
-                        </center>
-            
-                    </div>
-        
-        
-                
-        
-                <hr style="text-align:center;margin-left: auto;margin-right: auto;width:100%;background-color: #B9C0C8;background:linear-gradient(to right,#111111 20%,#B9C0C8 50%,#111111 80%);border: none;" size="3px ">
-                <div class="cpy ">Copyright © 2017 | ce.vit.com | All Rights Reserved | Privacy Policy & Website Terms of Use
+
+    </nav>
+    <canvas width="150px" height="150px" id="logring">
+
+
+
+    </canvas>
+
+    <div class="logo">
+        <a href="#"> <img src="{% static 'mytodo/celogo.jpg' %}" width="50px" height="50px"> </a>
+
+
+    </div>
+
+    <div class="container main_container">
+
+        <div style="display:flex;"></div>
+
+        <div class="jmbbanner">
+
+            <img id="quotespic" src="{% static 'mytodo/centrelog.jpg' %}">
+
+
+            <div class="textquotes">
+                <div>
+                    If you can't remember your past<br> then you are condemned to repeat it.<br><br>
+                    -Dynamic Programming
                 </div>
-        
-        
-        </body>
-        
-        
-        </html>
+                <div class="lgsignup">
+                    <button class="btn signin" onclick="location.href='#form'">Add task to your todo list</button>
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+        <div class="maincontent">
+            <div id="form" class="form">
+                <h1>What do you want to do today?</h1>
+                <form action="{% url 'add' %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+
+                        {{form.title}}
+                    </div>
+                    <div>
+                        {{form.desc}}
+
+                    </div>
+                    <div>
+                        {{form.lastdate}}
+                    </div>
+                    <div>
+                        <input type="submit" class=" formbtn" value="ADD">
+
+
+                    </div>
+                    <div>
+                        <br>view | manage your <a href="#todo"
+                            style="color:#445;text-decoration:none; font-size:20px;">TO DO LIST </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="secondarycontent" id="todo">
+        <center>
+            <h1>TO-DO LIST</h1>
+        </center>
+        <center>
+            {% for item in tlist %}
+            {% if item.complete %}
+            <div class="card completed">
+                <div class="theader">
+                    {{item.title}}
+                </div>
+                <div class="tbody">
+                    <h4>Description:</h4>
+                    {{item.desc}}
+
+                </div>
+                <div class="tfooter">
+                    <h4>Last date to complete</h4>
+                    <div class="tldate">{{item.lastdate}}</div>
+                </div>
+                <div>
+                    <form method="post" action="{% url 'delete' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{item.id}}">
+
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% elif item.suspended %}
+            <div class="card suspended">
+                <div class="theader">
+                    {{item.title}}
+                </div>
+                <div class="tbody">
+                    <h4>Description:</h4>
+                    {{item.desc}}
+                </div>
+                <div class="tfooter">
+                    <h4>Last date to complete</h4>
+                    <div class="tldate">{{item.lastdate}}</div>
+                </div>
+                <div class="bt">
+                    <form method="post" action="{% url 'activate' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{item.id}}">
+
+                        <button type="submit" class="activate">Activate</button>
+                    </form>
+                    <form method="post" action="{% url 'macomp' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{item.id}}">
+
+                        <button type="submit" class="macomplete">Mark as Completed</button>
+                    </form>
+
+                </div>
+
+            </div>
+            {% else %}
+            <div class="card pending">
+                <div class="theader">
+                    {{item.title}}
+                </div>
+                <div class="tbody">
+                    <h4>Description:</h4>
+                    {{item.desc}}
+                </div>
+                <div class="tfooter">
+                    <h4>Last date to complete</h4>
+                    <div class="tldate">{{item.lastdate}}</div>
+                </div>
+                <div class="bt">
+                    <form method="post" action="{% url 'suspend' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{item.id}}">
+
+                        <button type="submit" class="suspendbt">Suspend</button>
+                    </form>
+                    <form method="post" action="{% url 'macomp' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{item.id}}">
+
+                        <button type="submit" class="macomplete">Mark as Completed</button>
+                    </form>
+                </div>
+
+            </div>
+            {% endif %}
+            {% endfor %}
+        </center>
+    </div>
+
+
+    <div class="footer" id="status">
+        <center>
+            <h1>Status</h1>
+
+            <div
+                style="display: inline-block;border:1px solid; color:#f00;border-radius:10px 10px;padding:50px;margin:30px">
+                Suspended Task:<br>{{csus}}%
+
+            </div>
+            <div
+                style="display: inline-block;border:1px solid;color: orange;border-radius:10px 10px;padding:50px;margin:30px">
+                Completed Task:<br>{{cmc}}%
+
+            </div>
+            <div
+                style="display: inline-block;border:1px solid;color: #ddd;border-radius:10px 10px;padding:50px;margin:30px">
+                pending Task:<br>{{tp}}%
+
+            </div>
+
+        </center>
+
+    </div>
+
+
+
+
+    <hr style="text-align:center;margin-left: auto;margin-right: auto;width:100%;background-color: #B9C0C8;background:linear-gradient(to right,#111111 20%,#B9C0C8 50%,#111111 80%);border: none;"
+        size="3px ">
+    <div class="cpy ">Copyright © 2017 | ce.vit.com | All Rights Reserved | Privacy Policy & Website Terms of Use
+    </div>
+
+
+</body>
+
+
+</html>

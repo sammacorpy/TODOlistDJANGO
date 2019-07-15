@@ -396,7 +396,7 @@ canvas{
 }
 
 .macomplete{
-    background: #666;
+    background: rgb(21, 226, 148);
     border: none;
     border-radius:10px 10px;
     padding: 10px; 
@@ -439,7 +439,10 @@ canvas{
 .suspended>.theader{
     color: red;
 }
-
+.suspendbt{
+    border-color: rgb(218, 218, 218);
+    color: rgb(196, 196, 196);
+}
 .pending{
     border-color: #ddd;
 }
