@@ -201,7 +201,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{item.id}}">
 
-                        <button type="submit" class="suspendbt">Suspend</button>
+                        <button type="submit" class="suspend">Suspend</button>
                     </form>
                     <form method="post" action="{% url 'macomp' %}">
                         {% csrf_token %}
