@@ -330,7 +330,7 @@ canvas{
 
    
 }
-.form>form>div>input[type=text]{
+.form>form>div>input[type=text],input[type=date]{
     text-align: center;
     margin:20px 0;
     padding: 10px; 
