@@ -1,7 +1,7 @@
 
 # To Do list has always been a best project for practicing the basic concepts of any framework.
 
-demo of project [link](samstodolist.herokuapp.com)
+demo of project [link](http://samstodolist.herokuapp.com/)
 
 # requirements
 
