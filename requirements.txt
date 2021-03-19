@@ -3,7 +3,7 @@ cachetools==3.1.1
 Django==2.2.3
 django-cors-headers==3.0.2
 django-filter==2.1.0
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 gunicorn==19.9.0
 httplib2==0.13.0
 python-dateutil==2.8.0
